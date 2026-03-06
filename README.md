@@ -11,6 +11,24 @@
 - **持久化存储 (PostgreSQL)**：彻底从内存切到数据库，持久化你的全部对话列表与消息，前端随时加载漫游。
 - **高颜值纯享 UI**：分离左右双侧边栏（会话列表与动态技能表），黑暗/明亮模式无缝切换，参数结果代码块高亮。
 
+## 📸 界面预览
+
+### 浅色模式 & 技能热插拔展示
+
+![浅色模式主界面](docs/assets/main_light_mode.png)
+
+### 深色模式 & 沉浸式终端交互
+
+![深色模式主界面](docs/assets/main_dark_mode.png)
+
+### 动态技能面板加载
+
+![动态技能面板](docs/assets/skills_panel.png)
+
+### 流式对话与 Markdown 富文本渲染
+
+![流式对话演示](docs/assets/active_conversation.png)
+
 ## 🚀 快速开始
 
 ### 环境依赖
