@@ -11,7 +11,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 # 安装系统级依赖（如有需要，如 git, curl 等可以加在这里）
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
+    build-essential ssh\
     && rm -rf /var/lib/apt/lists/*
 
 # 复制依赖文件并安装 Python 包
