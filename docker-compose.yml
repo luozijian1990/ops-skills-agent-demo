@@ -16,11 +16,17 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-root123456}
       POSTGRES_DB: ${DB_NAME:-claude_agent}
     ports:
-      - "30306:5432"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - agent-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-root} -d ${DB_NAME:-claude_agent}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
   # ==========================================
   # 后端服务: FastAPI Agent
@@ -32,9 +38,14 @@ services:
     container_name: demo-agent-backend
     restart: always
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     environment:
       - TZ=Asia/Shanghai
+      # 容器内通过服务名连接 PostgreSQL
+      - DB_IP=postgres
+      - DB_PORT=5432
+      - DB_PASSWORD=${DB_PASSWORD:-root123456}
     ports:
       - "8000:8000"
     volumes:

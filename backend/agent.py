@@ -75,7 +75,13 @@ async def init_pg():
     global _pg_saver, _pg_store, _agent
 
     # 手动创建连接池，由我们控制生命周期（不使用 from_conn_string 的上下文管理器）
-    pool = AsyncConnectionPool(conninfo=DATABASE_URL_SYNC, open=False)
+    # autocommit=True: LangGraph setup() 会执行 CREATE INDEX CONCURRENTLY，
+    # 该语句不能在事务块内运行，必须开启 autocommit
+    pool = AsyncConnectionPool(
+        conninfo=DATABASE_URL_SYNC,
+        open=False,
+        kwargs={"autocommit": True},
+    )
     await pool.open()
 
     # checkpointer: Agent 对话上下文跨重启保留

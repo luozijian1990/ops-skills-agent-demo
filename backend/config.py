@@ -32,10 +32,10 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 DB_NAME = os.getenv("DB_NAME", "claude_agent")
 
 # SQLAlchemy 异步连接串 (asyncpg 驱动)
-DATABASE_URL = f"postgresql+asyncpg://{quote_plus(DB_USER)}:{quote_plus(DB_PASSWORD)}@{DB_IP}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL = f"postgresql+asyncpg://{quote_plus(DB_USER)}:{quote_plus(DB_PASSWORD)}@{DB_IP}:{DB_PORT}/{DB_NAME}?ssl=disable"
 
 # psycopg 同步连接串 (PostgresSaver / PostgresStore 用)
-DATABASE_URL_SYNC = f"postgresql://{quote_plus(DB_USER)}:{quote_plus(DB_PASSWORD)}@{DB_IP}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL_SYNC = f"postgresql://{quote_plus(DB_USER)}:{quote_plus(DB_PASSWORD)}@{DB_IP}:{DB_PORT}/{DB_NAME}?sslmode=disable"
 
 # ─── 日志配置 ────────────────────────────────────────
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
